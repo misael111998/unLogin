@@ -1,6 +1,8 @@
 package com.example.unlogin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtEntrar = findViewById(R.id.btn_entrar);
         BtEntrar.setOnClickListener(this);
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -66,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(response.isNull("nombre")){
                             Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_LONG).show();
                         }else{
+                            /*asignando valor a las variables*/
+                            guardarCredenciales(response);
+                            //----------------------------------
                             startActivity(new Intent(getApplicationContext(),Inside.class));
                         }
 
@@ -82,6 +90,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
                 Volley.newRequestQueue(this).add(jsonObjectRequest);
                 }
+
+    private void guardarCredenciales(JSONObject response) {
+        int id=response.optInt("id");
+        String nombre= response.optString("nombre");
+        String apat=response.optString("apat");
+        String amat=response.optString("amat");
+        String correo=response.optString("correo");
+        String pwd=response.optString("pwd");
+        String habilitado=response.optString("habilitado");
+        String admin=response.optString("admin");
+        String foto=response.optString("foto");
+
+
+        SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putInt("id",id);
+        editor.putString("nombre",nombre);
+        editor.putString("apat",apat);
+        editor.putString("amat",amat);
+        editor.putString("correo",correo);
+        editor.putString("pwd",pwd);
+        editor.putString("habilitado",habilitado);
+        editor.putString("admin",admin);
+        editor.putString("foto",foto);
+
+        editor.apply();
+    }
 
 
 /*
