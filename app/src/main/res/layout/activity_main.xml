@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
 
     <EditText
@@ -14,9 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|center"
         android:hint="Correo"
-        android:layout_weight="1"/>
+        />
     <EditText
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
@@ -26,9 +26,15 @@
     <Button
         android:id="@+id/btn_entrar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="Entrar"
+        android:layout_gravity="center|center_horizontal"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿No tienes cuenta? Registrate!"
+        android:textSize="20dp"
+        android:onClick="irRegistrar"/>
 
 </LinearLayout>

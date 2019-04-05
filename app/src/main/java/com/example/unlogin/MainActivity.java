@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
     }
 
+    public void irRegistrar(View view)
+    {
+        startActivity(new Intent(getApplicationContext(),Registro.class));
+    }
+
 
 /*
         StringRequest st = new StringRequest(Request.Method.GET,
